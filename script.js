@@ -17,8 +17,3 @@ console.log(addExpenses.toLowerCase().split(', '));
 
 let budgetDay = money / 30;
 console.log('Дневной бюджет: ' + budgetDay + ' руб');
-
-
-alert('Hello');
-
-console.log('Привет');
