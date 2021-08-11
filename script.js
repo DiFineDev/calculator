@@ -180,7 +180,7 @@ let appData = {
         periodAmount.innerHTML = periodSelect.value;
     },
     checkStartButton: function() {
-        if (salaryAmount.value === ''){
+        if (salaryAmount.value === '' || !isNumber(salaryAmount.value)){
             buttonOfCalculation.disabled = true;
         } else {
             buttonOfCalculation.disabled = false; 
