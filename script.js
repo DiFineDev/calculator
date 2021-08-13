@@ -21,8 +21,7 @@ let buttonOfCalculation = document.getElementById('start'),
     additionalExpensesItem= document.querySelector('.additional_expenses-item'),
     targetAmount = document.querySelector('.target-amount'),
     periodSelect = document.querySelector('.period-select'),
-    periodAmount = document.querySelector('.period-amount'),
-    incomeItem = document.querySelectorAll('.income-items');
+    periodAmount = document.querySelector('.period-amount');
 
 function isNumber(n) {
     return !isNaN(parseFloat(n)) && isFinite(n);
@@ -58,6 +57,8 @@ let appData = {
         appData.clearAllInputs();
         appData.unblockInputs();
         appData.showStartButton();
+        appData.deleteIncomeItems();
+        appData.deleteExpensesItems();
         buttonOfCalculation.disabled = true;
     },
     appDataReset: function(){
@@ -74,7 +75,20 @@ let appData = {
         appData.income = {},
         appData.incomeMonth = 0;  
     },
-    
+    deleteIncomeItems: function(){
+        let incomeItems = document.querySelectorAll('.income-items');
+        for (let i = 1; i < incomeItems.length; i++){
+            incomeItems[i].remove();
+        }
+        buttonIncomeAdd.style.display = 'inline-block';
+    },
+    deleteExpensesItems: function(){
+        let expensesItems = document.querySelectorAll('.expenses-items');
+        for (let i = 1; i < expensesItems.length; i++){
+            expensesItems[i].remove();
+        }
+        buttonExpensesAdd.style.display = 'inline-block';
+    },
     clearAllInputs: function(){  
         let allInputs = document.querySelectorAll('input');
 
@@ -85,19 +99,29 @@ let appData = {
         periodAmount.textContent = periodSelect.value;
     },
     blockInputs: function(){
-        let leftSide = document.querySelector('.data'),
+        let btnPlus = document.querySelectorAll('.btn_plus'), 
+            leftSide = document.querySelector('.data'),
             leftInputs = leftSide.querySelectorAll('[type="text"]');
 
         leftInputs.forEach(element => {
             element.readOnly = true;
         });
+
+        btnPlus.forEach(element => {
+            element.disabled = true;
+        });
+        
     },
     unblockInputs: function(){
-        let leftSide = document.querySelector('.data'),
+        let btnPlus = document.querySelectorAll('.btn_plus'),
+            leftSide = document.querySelector('.data'),
             leftInputs = leftSide.querySelectorAll('[type="text"]');
 
         leftInputs.forEach(element => {
             element.readOnly = false;
+        });
+        btnPlus.forEach(element => {
+            element.disabled = false;
         }); 
     },
     showResetButton: function() {
